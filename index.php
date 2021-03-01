@@ -55,7 +55,12 @@
                         <td><?php echo $product['create_date']; ?></td>
                         <td>
                             <button type="button" class="btn btn-info btn-sm">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            <!-- <a href="delete.php?id=<?php echo $product['id']; ?>" type="button" class="btn btn-danger btn-sm">Delete</a> -->
+                            <!-- form is used to send id in a secure way through post method -->
+                            <form action="delete.php" method="post" style="display: inline-block;">
+                                <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>
