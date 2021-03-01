@@ -1,0 +1,17 @@
+* {
+    /* border: 2px solid red; */
+}
+
+body {
+    padding: 50px;
+
+}
+
+.product-img {
+    width: 50px;
+    height: auto;
+}
+
+.product-img>img {
+    width: 100%;
+}
