@@ -1,6 +1,4 @@
-* {
-    /* border: 2px solid red; */
-}
+
 
 body {
     padding: 50px;
@@ -14,4 +12,9 @@ body {
 
 .product-img>img {
     width: 100%;
+}
+
+.product-img-view {
+    width: 120px;
+    height: auto;
 }
