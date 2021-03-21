@@ -1,5 +1,4 @@
 <?php
-
 require_once "functions.php";
 
 $id = $_GET['id'] ?? null;
@@ -8,8 +7,7 @@ if (!$id) {
     exit;
 }
 
-$pdo = new PDO('mysql:host=localhost;port=3306;dbname=product_crud', 'root', '');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = require_once "database.php";
 
 $statement = $pdo->prepare('SELECT * FROM products WHERE id = :id');
 $statement->bindValue(':id', $id);
@@ -70,54 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Crud</title>
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- custom css -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<?php include_once "views/partials/header.php"; ?>
 <p>
     <a href="index.php" class="btn btn-info">Back to products</a>
 </p>
 <h1>Update Product: <b><?php echo $product['title'] ?></b></h1>
 
-<?php if (!empty($errors)): ?>
-    <div class="alert alert-danger">
-        <?php foreach ($errors as $error): ?>
-            <div><?php echo $error ?></div>
-        <?php endforeach; ?>
-    </div>
-<?php endif; ?>
-
-<form action="" method="post" enctype="multipart/form-data">
-    <?php if ($product['image']): ?>
-        <img src="<?php echo $product['image'] ?>" class="product-img-view">
-    <?php endif; ?>
-    <div class="form-group">
-        <label>Product Image</label><br>
-        <input type="file" name="image">
-    </div>
-    <div class="form-group">
-        <label>Product title</label>
-        <input type="text" name="title" class="form-control" value="<?php echo $title ?>">
-    </div>
-    <div class="form-group">
-        <label>Product description</label>
-        <textarea class="form-control" name="description"><?php echo $description ?></textarea>
-    </div>
-    <div class="form-group">
-        <label>Product price</label>
-        <input type="number" step=".01" name="price" class="form-control" value="<?php echo $price ?>">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php include_once "views/products/form.php"; ?>
 
 </body>
 </html>
